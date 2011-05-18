@@ -200,9 +200,9 @@ Basecamp.Post.from_xml = function( xml ) {
 			use_textile:            Basecamp.nodeValue( 'use-textile',           node ),
 			extended_body:          Basecamp.nodeValue( 'extended-body',         node ),
 			display_body:           Basecamp.nodeValue( 'display-body',          node ),
-			display_exteneded_body: Basecamp.nodeValue( 'display-extended-body', node ),
-			private:                Basecamp.nodeValue( 'private',               node )
+			display_exteneded_body: Basecamp.nodeValue( 'display-extended-body', node )
 		};
+		post['private'] = Basecamp.nodeValue('private', node);
 		posts.push( new Basecamp.Post( post ) );
 	}
 	return posts;
@@ -276,20 +276,21 @@ Basecamp.TodoItem.from_xml = function( xml ) {
 	for ( var i=0; i<nodes.length; i++ ) {
 		var node = nodes[i];
 		var todo_item = {
-			id:                     Basecamp.nodeValue( 'id',                    node ),
-			content:                Basecamp.nodeValue( 'content',               node ),
-			position:               Basecamp.nodeValue( 'position',              node ),
-			created_on:             Basecamp.nodeValue( 'created_on',            node ),
-			creator_id:             Basecamp.nodeValue( 'creator_id',            node ),
-			completed:              Basecamp.nodeValue( 'completed',             node ),
-			responsible_party_type: Basecamp.nodeValue( 'responsible-part-type', node ),
-			responsible_party_id:   Basecamp.nodeValue( 'responsible-part-id',   node ),
-			completed_on:           Basecamp.nodeValue( 'completed-on',          node ),
-			completer_id:           Basecamp.nodeValue( 'completer-id',          node )
+			id:                     Basecamp.nodeValue( 'id',                     node ),
+			content:                Basecamp.nodeValue( 'content',                node ),
+			position:               Basecamp.nodeValue( 'position',               node ),
+			created_on:             Basecamp.nodeValue( 'created-on',             node ),
+			creator_id:             Basecamp.nodeValue( 'creator-id',             node ),
+			completed:              Basecamp.nodeValue( 'completed',              node ),
+			responsible_party_type: Basecamp.nodeValue( 'responsible-party-type', node ),
+			responsible_party_id:   Basecamp.nodeValue( 'responsible-party-id',   node ),
+			completed_on:           Basecamp.nodeValue( 'completed-on',           node ),
+			completed_id:           Basecamp.nodeValue( 'completed-id',           node ),
+			responsible_party_name: Basecamp.nodeValue( 'responsible-party-name', node )
 		};
 		todo_items.push( new Basecamp.TodoItem( todo_item ) );
 	}
-	return todo_item;
+	return todo_items;
 };
 
 
@@ -309,10 +310,10 @@ Basecamp.TodoList.from_xml = function( xml ) {
 			description:  Basecamp.nodeValue( 'description',  node ),
 			project_id:   Basecamp.nodeValue( 'project-id',   node ),
 			milestone_id: Basecamp.nodeValue( 'milestone-id', node ),
-			position:     Basecamp.nodeValue( 'position',     node ),
-			private:      Basecamp.nodeValue( 'private',      node ),
+			position:     Basecamp.nodeValue( 'position',     node ),			
 			todo_items: todo_items && Basecamp.TodoItem.from_xml( todo_items )
 		};
+		todo_list['private'] = Basecamp.nodeValue('private', node);
 		todo_lists.push( new Basecamp.TodoList( todo_list ) );
 	}
 	return todo_lists;

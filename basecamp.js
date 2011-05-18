@@ -51,7 +51,9 @@ function Basecamp( url, user_name, password ) {
 		connection.onreadystatechange = function() {
 			if ( connection.readyState == 4 )
 				if ( connection.status == 200 ) {
-					air.Introspector.Console.dump( connection.responseText );
+					if(typeof(console) != 'undefined' && typeof(console.log) == 'function') {
+						console.log(connection.responseText);
+					}
 					callbacks["success"]( connection.responseXML );
 				} else
 					(callbacks["error"] || error)( connection.status, connection.statusText );
@@ -126,7 +128,7 @@ Basecamp.prototype = {
 				request.push("<body>" + post.body + "</body>");
 				request.push("<extended-body>" + (post.extended_body || "") + "</extended-body>");
 				post.use_textile && request.push("<use-textile>1</use-textile>");
-				request.push("<private>" + post.private + "</private>");
+				request.push("<private>" + post['private'] + "</private>");
 			request.push("</post>");
 			for ( var i=0; i<notify.length; i++ )
 				request.push("<notify>" + notify[i] + "</notify>");
@@ -146,7 +148,7 @@ Basecamp.prototype = {
 				request.push("<body>" + post.body + "</body>");
 				request.push("<extended-body>" + (post.extended_body || "") + "</extended-body>");
 				post.use_textile && request.push("<use-textile>1</use-textile>");
-				request.push("<private>" + post.private + "</private>");
+				request.push("<private>" + post["private"] + "</private>");
 			request.push("</post>");
 			for ( var i=0; i<notify.length; i++ )
 				request.push("<notify>" + notify[i] + "</notify>");
@@ -217,7 +219,7 @@ Basecamp.prototype = {
 	create_list: function( project_id, list, callbacks ) {
 		var request = ["<request>"];
 			request.push("<milestone-id>" + list.milestone_id + "</milestone-id>");
-			request.push("<private>" + list.private + "</private>");
+			request.push("<private>" + list["private"] + "</private>");
 			request.push("<tracked>" + list.tracked + "</tracked>");
 			request.push("<name>" + list.name + "</name>");
 			request.push("<description>" + list.description + "</description>");
@@ -283,7 +285,7 @@ Basecamp.prototype = {
 				request.push("<name>" + list.name + "</name>");
 				request.push("<description>" + list.description + "</description>");
 				request.push("<milestone-id>" + list.milestone_id + "</milestone-id>");
-				request.push("<private>" + list.private + "</private>");
+				request.push("<private>" + list["private"] + "</private>");
 				request.push("<tracked>" + list.tracked + "</tracked>");
 			request.push("</list>");
 		request.push("</request>");
