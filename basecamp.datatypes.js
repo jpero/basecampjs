@@ -311,7 +311,7 @@ Basecamp.TodoList.from_xml = function( xml ) {
 			milestone_id: Basecamp.nodeValue( 'milestone-id', node ),
 			position:     Basecamp.nodeValue( 'position',     node ),
 			private:      Basecamp.nodeValue( 'private',      node ),
-			todo_items: todo_items && Basecamp.TodoItems.from_xml( todo_items )
+			todo_items: todo_items && Basecamp.TodoItem.from_xml( todo_items )
 		};
 		todo_lists.push( new Basecamp.TodoList( todo_list ) );
 	}
