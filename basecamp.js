@@ -67,8 +67,9 @@ function Basecamp( url, api_token ) {
             console.log(connection.responseText);
           }
           callbacks["success"]( connection.responseXML );
-        } else
+        } else {
           (callbacks["error"] || error)( connection.status, connection.statusText );
+        }
     };
     connection.send( body );
   };
@@ -89,7 +90,15 @@ Basecamp.version = "0.1a";
 
 Basecamp.prototype = {
   projects: function( callbacks ) {
-    this.get( "/projects.xml", callbacks, null );
+    this.get( "/projects.xml", callbacks );
+  },
+
+  projects_count: function( callbacks ) {
+    this.get( "/projects/count.xml", callbacks );
+  },
+
+  project: function( id, callbacks ) {
+    this.get( "/projects/" + id + ".xml", callbacks );
   },
 
   message_categories: function( project_id, callbacks ) {

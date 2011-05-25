@@ -4,13 +4,13 @@ This is a JavaScript wrapper for the Basecamp API. It covers everything in the A
 
 Here is an example of getting back an Array of projects from Basecamp.
 
-    var basecamp = new Basecamp("your.basecamp.url", "user_name", "password");
+    var basecamp = new Basecamp("your.basecamp.url", "api_token");
     basecamp.projects({
       success: function( projects_xml ) {
         var projects = Basecamp.Project.from_xml( projects_xml );
         alert( projects.length );
       }
-    };
+    });
 
 Here is an example of how to create a new message assuming you've already used the API to retrieve the desired project_id, message_category_id and person_id.
 
@@ -27,21 +27,9 @@ Here is an example of how to create a new message assuming you've already used t
     });
 
 
-## Why?
-
-I finally found some time to explore Adobe AIR and thought ... "Hey, why don't I write an AIR app for Basecamp." The first step was to write this API wrapper/adapter so that I could easily communicate with Basecamp.
-
-
-## Roadmap
-
-If I continue to find time (and have a Basecamp account to play with) this API will surely evolve as I begin to use the different parts while building the AIR app. Beware that as it stands right now this API wrapper is mostly untested.
-
-I'm particularly anxious to add the file uploading for messages and comments.
-
-
 ## Documentation
 
-First place to look is the actual [Basecamp API documentation](http://developer.37signals.com/basecamp/index.shtml). Currently this API follows their [Ruby wrapper](http://developer.37signals.com/basecamp/basecamp.rb) very closely. Other than that ... its all code for now. :)
+First place to look is the actual [Basecamp API documentation](http://developer.37signals.com/basecamp/). Currently this API follows their [Ruby wrapper](http://developer.37signals.com/basecamp/basecamp.rb) very closely. Other than that ... its all code for now. :)
 
 
 ## License
